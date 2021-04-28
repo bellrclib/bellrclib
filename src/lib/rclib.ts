@@ -41,6 +41,7 @@
   calcTotalPrice(): number {
     this.subTot = this.calcSubTot(this.qty, this.price)
     const discountAmount = this.calcDiscount(this.subTot)
+    this.subTot = this.subTot - discountAmount;
 
     return this.subTot // TODO: Fix interim calc
   }
@@ -69,5 +70,6 @@
     }
     return discount;
   }
+
 
 }
