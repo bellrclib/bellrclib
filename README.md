@@ -1,16 +1,29 @@
-### Hi there 👋
+# README
 
-<!--
-**bellrclib/bellrclib** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+## About RCLib - Reseller Costs Library
 
-Here are some ideas to get you started:
+It provides a library to handle volume discounts for resellers of Bell products.
+The test will provide verification of functionality as per instructions.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Pre-requisites for using RCLib
+
+You need these runtime versions:
+
+- **Node.js v16.0.0** Installed using brew
+- **Yarn 1.22.10** Installed using npm
+
+
+## Installing / Running RCLib
+
+Install RCLib and its dependencies:
+
+```
+  yarn install
+```
+
+To run RCLib tests
+
+```
+  yarn run test
+```
+
