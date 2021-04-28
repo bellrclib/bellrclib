@@ -26,4 +26,18 @@ To run RCLib tests
 ```
   yarn run test
 ```
+## Dev mode (using TDD)
 
+Test can be run using Ava in watch mode for changes, a watch can be run for code and tests
+
+Run watch for code
+
+```
+  yarn run watch:build
+```
+
+Run watch for tests
+
+```
+  yarn run watch:test
+```
