@@ -28,23 +28,27 @@ export class ResellerCosts {
     this.totPrice = 0;
   }
 
+  // Calculates  subtotal
   private calcSubTot(qty: number, price: number): number {
     const subTot = qty * price;
     return subTot;
   }
 
+  // Calculates  Discount
   private calcDiscount(subTot: number): number {
     const discount = this.lookupDiscountForVolume(subTot);
     const discountAmount = subTot * (discount / 100);
     return discountAmount;
   }
 
+  // Calculates  Taxes
   private calcTaxes(provStateCode: string, discSubTot: number): number {
     const taxRate = this.lookupTaxRate(provStateCode);
     const taxedAmount = discSubTot * (taxRate / 100);
     return taxedAmount;
   }
 
+  // Main API method to calculate Total price
   calcTotalPrice(): number {
     this.subTot = this.calcSubTot(this.qty, this.price);
     const discountAmount = this.calcDiscount(this.subTot);
