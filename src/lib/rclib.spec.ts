@@ -9,7 +9,7 @@ import { ResellerCosts } from './rclib';
 /**
  * Test cases illustrating two scenarios with different volumes
  * and different tax rates for different prov/states.
- * 
+ *
  */
 
 // ## Example 1:

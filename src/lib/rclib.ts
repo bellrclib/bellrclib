@@ -6,25 +6,26 @@
 
 /**
  * ResellerCosts provides the functionality to calculate prices for products
- * 
+ *
  *  Inputs
  *    - number of items
  *    - price per item
  *    - 2-letter province/state code
  */
 
- export class ResellerCosts {
-
+export class ResellerCosts {
   qty: number;
   price: number;
   provStateCode: string;
-  subTot: number
+  subTot: number;
+  totPrice: number;
 
   constructor(qty: number, price: number, provStateCode: string) {
     this.qty = qty;
     this.price = price;
     this.provStateCode = provStateCode;
-    this.subTot = 0
+    this.subTot = 0;
+    this.totPrice = 0;
   }
 
   private calcSubTot(qty: number, price: number): number {
@@ -38,12 +39,19 @@
     return discountAmount;
   }
 
-  calcTotalPrice(): number {
-    this.subTot = this.calcSubTot(this.qty, this.price)
-    const discountAmount = this.calcDiscount(this.subTot)
-    this.subTot = this.subTot - discountAmount;
+  private calcTaxes(provStateCode: string, discSubTot: number): number {
+    const taxRate = this.lookupTaxRate(provStateCode);
+    const taxedAmount = discSubTot * (taxRate / 100);
+    return taxedAmount;
+  }
 
-    return this.subTot // TODO: Fix interim calc
+  calcTotalPrice(): number {
+    this.subTot = this.calcSubTot(this.qty, this.price);
+    const discountAmount = this.calcDiscount(this.subTot);
+    this.subTot = this.subTot - discountAmount;
+    const taxAmount = this.calcTaxes(this.provStateCode, this.subTot);
+    this.totPrice = this.subTot + taxAmount
+    return this.totPrice
   }
 
   // Util
@@ -71,5 +79,27 @@
     return discount;
   }
 
-
+  private lookupTaxRate(provStateCode: string): number {
+    let taxRate = 0;
+    switch (provStateCode) {
+      case 'AB':
+        taxRate = 5;
+        break;
+      case 'ON':
+        taxRate = 13;
+        break;
+      case 'QC':
+        taxRate = 14.975;
+        break;
+      case 'MI':
+        taxRate = 6;
+        break;
+      case 'DE':
+        taxRate = 0;
+        break;
+      default:
+        break;
+    }
+    return taxRate;
+  }
 }
